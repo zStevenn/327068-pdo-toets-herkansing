@@ -54,9 +54,40 @@ class Queries
       $rows .= "<td>" . $d->Formaat . "</td>";
       $rows .= "<td>" . $d->Saus . "</td>";
       $rows .= "<td>" . $d->Boon . "</td>";
-      $rows .= "<td>" . $d->Rijst . "</td></tr>";
+      $rows .= "<td>" . $d->Boon . "</td>";
+      $rows .= "<td><a href='./update.php?id=" . $d->BurritoID . "'><i class='fa-solid fa-pencil'></i></a></td>";
+      $rows .= "<td><a href='./index.php?action=delete&id=" . $d->BurritoID . "'><i class='fa-solid fa-trash-can'></i></a></td></tr>";
     }
     // Return created HTML rows
     return $rows;
+  }
+
+  // Delete burrito
+  public function deleteBurrito($id)
+  {
+    $sql = "DELETE FROM `burrito` WHERE `burrito`.`BurritoID` = $id";
+    $this->db->query($sql);
+    $this->db->execute();
+  }
+
+  // Update burrito
+  public function updateBurrito($id, $size, $sauce, $beans, $rice)
+  { {
+      // Sanitize and trim post values
+      $sz = trim(filter_var($size, FILTER_SANITIZE_STRING));
+      $sc = trim(filter_var($sauce, FILTER_SANITIZE_STRING));
+      $b = trim(filter_var($beans, FILTER_SANITIZE_STRING));
+      $r = trim(filter_var($rice, FILTER_SANITIZE_STRING));
+
+      $sql = "UPDATE `burrito` 
+                SET `Formaat` = '$sz', 
+                    `Saus` = '$sc', 
+                    `Boon` = '$b', 
+                    `Rijst` = '$r' 
+              WHERE `burrito`.`BurritoID` = $id;";
+      // Prepare and execute sql
+      $this->db->query($sql);
+      $this->db->execute();
+    }
   }
 }

@@ -1,29 +1,17 @@
 <?php
-// Instantiate class Queries upon opening index.php
 require_once './queries.php';
 $query = new Queries;
-
-// Create data rows from table `burrito`
-$burritoRows = $query->readBurrito();
-
-// Initiate an insert into when form is send
-if (isset($_POST)) {
-  if (isset($_POST["submit"])) {
-    // Call function insertBurrito with 4 variables (form inputs)
-    $query->insertBurrito($_POST["formaat"], $_POST["saus"], $_POST["bonen"], $_POST["rijst"]);
-    header("Location: index.php");
-  }
+$id = $_GET["id"];
+// Check if update submit has been send
+if (isset($_POST) && isset($_POST["submit"])) {
+  var_dump($_POST);
+  // Initiate updateBurrito function in queries.php
+  $query->updateBurrito($_POST["id"], $_POST["formaat"], $_POST["saus"], $_POST["bonen"], $_POST["rijst"]);
+  // Send user to index.php
+  header("Location: index.php");
 }
 
-// Initiate deleteBurrito function when user has clicked on the delete button
-if (isset($_GET) && isset($_GET["action"]) && isset($_GET["id"])) {
-  if ($_GET["action"] === "delete") {
-    $query->deleteBurrito($_GET["id"]);
-    header("Location: index.php");
-  }
-}
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -39,8 +27,8 @@ if (isset($_GET) && isset($_GET["action"]) && isset($_GET["id"])) {
 </head>
 
 <body>
-  <h1>Maak je eigen burrito</h1>
-  <form action="./index.php" method="POST">
+  <h1>Update je burrito</h1>
+  <form action="#" method="POST">
     <!-- Select voor burritoformaat -->
     <div class="form-group">
       <label for="exampleFormControlSelect1">Burritoformaat</label>
@@ -100,28 +88,10 @@ if (isset($_GET) && isset($_GET["action"]) && isset($_GET["id"])) {
         Bruine bonen
       </label>
     </div>
+    <input type="hidden" name="id" value="<?php echo $id ?>">
     <button type="submit" name="submit" class="mt-2 btn btn-primary btn-lg btn-block">Submit</button>
-  </form>
 
-  <!-- Table for burrito details -->
-  <h1>Tabel van alle burrito's</h1>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Formaat</th>
-        <th scope="col">Saus</th>
-        <th scope="col">Boon</th>
-        <th scope="col">Rijst</th>
-        <th scope="col">Update</th>
-        <th scope="col">Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- Echo burritoRows -->
-      <?= $burritoRows ?>
-    </tbody>
-  </table>
+  </form>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
