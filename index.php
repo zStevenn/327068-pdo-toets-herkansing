@@ -13,7 +13,69 @@
 </head>
 
 <body>
-  <h1>Hello, world!</h1>
+  <h1>Maak je eigen burrito</h1>
+  <form>
+    <!-- Select voor burritoformaat -->
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Burritoformaat</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option name="20">20 centimeter</option>
+        <option name="25">25 centimeter</option>
+        <option name="30">30 centimeter</option>
+      </select>
+    </div>
+    <!-- Select voor sausformaat -->
+    <div class="form-group">
+      <label for="exampleFormControlSelect2">Saus</label>
+      <select class="form-control" id="exampleFormControlSelect2">
+        <option name="Salsa crudo">Salsa crudo</option>
+        <option name="Salsa verde">Salsa verde</option>
+        <option name="Salsa roja">Salsa roja</option>
+        <option name="Crème fraiche">Crème fraiche</option>
+      </select>
+    </div>
+    <!-- Select voor bonen -->
+    <h5 class="m-2">Bonen</h5>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="bonen" id="exampleRadios1" value="Kidney Bonen">
+      <label class="form-check-label" for="exampleRadios1">
+        Kidney Bonen
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="bonen" id="exampleRadios2" value="Zwarte bonen">
+      <label class="form-check-label" for="exampleRadios2">
+        Zwarte bonen
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="bonen" id="exampleRadios3" value="Bruine bonen">
+      <label class="form-check-label" for="exampleRadios3">
+        Bruine bonen
+      </label>
+    </div>
+    <!-- Select voor Rijst -->
+    <h5 class="m-2">Rijst</h5>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="rijst" id="exampleRadios4" value="Witte Rijst">
+      <label class="form-check-label" for="exampleRadios4">
+        Witte Rijst
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="rijst" id="exampleRadios5" value="Zwarte bonen">
+      <label class="form-check-label" for="exampleRadios5">
+        Zwarte bonen
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="rijst" id="exampleRadios6" value="Bruine bonen">
+      <label class="form-check-label" for="exampleRadios6">
+        Bruine bonen
+      </label>
+    </div>
+    <button type="submit" class="mt-2 btn btn-primary btn-lg btn-block">Submit</button>
+  </form>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
