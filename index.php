@@ -1,3 +1,20 @@
+<?php
+// Instantiate class Queries upon opening index.php
+require_once './queries.php';
+$query = new Queries;
+
+// Create data rows from table `burrito`
+$burritoRows = $query->readBurrito();
+
+// Initiate an insert into when form is send
+if (isset($_POST)) {
+  if (isset($_POST["submit"])) {
+    // Call function insertBurrito with 4 variables (form inputs)
+    $query->insertBurrito($_POST["formaat"], $_POST["saus"], $_POST["bonen"], $_POST["rijst"]);
+  }
+}
+?>
+
 <!doctype html>
 <html lang="en">
 
@@ -14,24 +31,24 @@
 
 <body>
   <h1>Maak je eigen burrito</h1>
-  <form>
+  <form action="./index.php" method="POST">
     <!-- Select voor burritoformaat -->
     <div class="form-group">
       <label for="exampleFormControlSelect1">Burritoformaat</label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option name="20">20 centimeter</option>
-        <option name="25">25 centimeter</option>
-        <option name="30">30 centimeter</option>
+      <select class="form-control" id="exampleFormControlSelect1" name="formaat">
+        <option value="20">20 centimeter</option>
+        <option value="25">25 centimeter</option>
+        <option value="30">30 centimeter</option>
       </select>
     </div>
     <!-- Select voor sausformaat -->
     <div class="form-group">
       <label for="exampleFormControlSelect2">Saus</label>
-      <select class="form-control" id="exampleFormControlSelect2">
-        <option name="Salsa crudo">Salsa crudo</option>
-        <option name="Salsa verde">Salsa verde</option>
-        <option name="Salsa roja">Salsa roja</option>
-        <option name="Crème fraiche">Crème fraiche</option>
+      <select class="form-control" id="exampleFormControlSelect2" name="saus">
+        <option value="Salsa crudo">Salsa crudo</option>
+        <option value="Salsa verde">Salsa verde</option>
+        <option value="Salsa roja">Salsa roja</option>
+        <option value="Crème fraiche">Crème fraiche</option>
       </select>
     </div>
     <!-- Select voor bonen -->
@@ -57,7 +74,7 @@
     <!-- Select voor Rijst -->
     <h5 class="m-2">Rijst</h5>
     <div class="form-check">
-      <input class="form-check-input" type="radio" name="rijst" id="exampleRadios4" value="Witte Rijst">
+      <input class="form-check-input" type="radio" name="rijst" id="exampleRadios4" value="Witte rijst">
       <label class="form-check-label" for="exampleRadios4">
         Witte Rijst
       </label>
@@ -74,8 +91,26 @@
         Bruine bonen
       </label>
     </div>
-    <button type="submit" class="mt-2 btn btn-primary btn-lg btn-block">Submit</button>
+    <button type="submit" name="submit" class="mt-2 btn btn-primary btn-lg btn-block">Submit</button>
   </form>
+
+  <!-- Table for burrito details -->
+  <h1>Tabel van alle burrito's</h1>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Formaat</th>
+        <th scope="col">Saus</th>
+        <th scope="col">Boon</th>
+        <th scope="col">Rijst</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Echo burritoRows -->
+      <?= $burritoRows ?>
+    </tbody>
+  </table>
 
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
